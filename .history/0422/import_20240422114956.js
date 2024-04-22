@@ -1,0 +1,1 @@
+import { myNumber } from "./export.js";
