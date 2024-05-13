@@ -187,7 +187,7 @@
                         const image = document.createElement("img");
 
                         //天気コード内のconst weathercodes内のコードを活用
-                        console.log(weatherCode[code[i]][0]);
+                        console.log(weatherCodes[code[i]][0]);
                         const weathericon = weathercodes[code[i]][0];
                         image.src = `https://www.jma.go.jp/bosai/forecast/img/${weathericon}`;
                         result.appendChild(image);
