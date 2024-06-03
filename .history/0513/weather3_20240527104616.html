@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css">
+    <title>天気予報APIアプリ</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid #000;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<header>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap');
+    </style>
+    <h1>天気予報<br>
+        <span></span>
+    </h1>
+</header>
+
+<body>
+
+    <nav>
+
+        <!-- <button class="animated-button">
+            <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+                </path>
+            </svg>
+            <span class="text">5月20日</span>
+            <span class="circle"></span>
+            <svg viewBox="0 0 24 24" class="arr-1" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+                </path>
+            </svg>
+        </button>
+        <button class="animated-button">
+            <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+                </path>
+            </svg>
+            <span class="text">5月21日</span>
+            <span class="circle"></span>
+            <svg viewBox="0 0 24 24" class="arr-1" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+                </path>
+            </svg>
+        </button>
+        <button class="animated-button">
+            <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+                </path>
+            </svg>
+            <span class="text">5月22日</span>
+            <span class="circle"></span>
+            <svg viewBox="0 0 24 24" class="arr-1" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+                </path>
+            </svg>
+        </button> -->
+
+        <!-- <button href="" class="btn btn-border-shadow btn-border-shadow--radius" class="today">5月20日</button>
+        <button href="" class="btn btn-border-shadow btn-border-shadow--radius" class="tomorrow">5月21日</button>
+        <button href="" class="btn btn-border-shadow btn-border-shadow--radius" class="twodayslater">5月22日</button> -->
+        <button class="content">5月20日</button>
+        <button class="content">5月21日</button>
+        <button class="content">5月22日</button>
+    </nav>
+
+    <main>
+        <div class="forecast"></div>
+    </main>
+
+
+    <script src="./weathercode.js"></script>
+
+    <script>
+        const codeNums = [
+            { 愛知県: 230000 },
+            { 岐阜県: 210000 },
+            { 三重県: 240000 },
+            { 静岡県: 220000 }
+        ];
+        const weekUrl = `https://www.jma.go.jp/bosai/forecast/data/forecast/${codeNums[0]["愛知県"]}.json`;
+        const url = `https://www.jma.go.jp/bosai/forecast/data/overview_forecast/${codeNums[0]["愛知県"]}.json`;
+        const Btns = document.querySelectorAll("button");
+
+        fetch(weekUrl)
+            .then(function (response) {
+                if (response.status !== 200) {
+                    console.log("問題がありました。ステータスコード:" + response.status);
+                    return;
+                }
+                response.json().then(function (data) {
+                    console.log(data);
+
+                    //愛知県西部の天気予報をwest、日付をweatherDateに代入します。
+                    const west = data[0].timeSeries[0].areas[0];
+                    const weatherDate = data[0].timeSeries[0].timeDefines;
+
+                    //日付をbuttonに代入
+
+                    weatherDate.forEach((date, index) => {
+                        Btns[index].innerHTML = `${new Date(date).getMonth() + 1}月${new Date(
+                            date
+                        ).getDate()}日`;
+                        Btns[index].addEventListener("click", function () {
+                            console.log(west.weatherCodes[index]);
+
+                            //表示場所を取得
+                            const weatherArea = document.querySelector(".forecast");
+                            weatherArea.innerHTML = weatherForecast(
+                                west.weatherCodes[index]
+                            ).result;
+                            const image = document.createElement("img");
+                            image.setAttribute(
+                                "src",
+                                `https://www.jma.go.jp/bosai/forecast/img/${weatherForecast(west.weatherCodes[index]).imagecode
+                                }`
+                            );
+                            weatherArea.append(image);
+                        });
+                    });
+                });
+            })
+            .catch(function (err) {
+                console.log("Fetchエラー:", err);
+            });
+
+        //コード表と取得コードをすり合わせて、天気を返す関数
+        const weatherForecast = function (getCode) {
+            for (let weather in weathercode) {
+                if (weather === getCode) {
+                    return {
+                        result: weathercode[weather][3],
+                        imagecode: weathercode[weather][0]
+                    };
+                }
+            }
+        };
+    </script>
+</body>
+
+
+</html>

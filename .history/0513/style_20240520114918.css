@@ -1,0 +1,40 @@
+h1 {
+    text-align: center;
+
+    color: #ffa500;
+
+    & span {
+        font-size: 0.7em;
+    }
+}
+
+nav {
+    text-align: center;
+}
+
+.forecast {
+    margin-inline: auto;
+    text-align: center;
+}
+
+body {
+    background-color: #bce2e8;
+}
+
+button {
+    color: #fff;
+    border-top: 4px solid #48ecc4;
+    border-right: 4px solid #0a5f4a;
+    border-bottom: 4px solid #0f745b;
+    border-left: 4px solid #8cf9de;
+    border-radius: 0;
+    background: #11a37f;
+}
+
+a.btn-solid:hover {
+    color: #fff;
+    border-top: 4px solid #0f745b;
+    border-right: 4px solid #8cf9de;
+    border-bottom: 4px solid #48ecc4;
+    border-left: 4px solid #0a5f4a;
+}

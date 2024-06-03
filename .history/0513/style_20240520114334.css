@@ -1,0 +1,22 @@
+h1 {
+    text-align: center;
+
+    color: #ffa500;
+
+    & span {
+        font-size: 0.7em;
+    }
+}
+
+nav {
+    text-align: center;
+}
+
+.forecast {
+    margin-inline: auto;
+    text-align: center;
+}
+
+body {
+    background-color: #bce2e8;
+}

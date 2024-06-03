@@ -1,0 +1,25 @@
+h1 {
+    text-align: center;
+
+    & span {
+        font-size: 0.7em;
+    }
+}
+
+nav {
+    text-align: center;
+}
+
+.forecast {
+    margin-inline: auto;
+    text-align: center;
+}
+
+body {
+    background-color: #bce2e8;
+}
+
+a.btn--raised {
+    color: #eb6877;
+    text-shadow: -1px -1px 1px rgba(255, 255, 255, .44), 1px 1px 1px #4a0a11;
+}

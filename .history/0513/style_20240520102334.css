@@ -1,0 +1,20 @@
+h1 {
+    text-align: center;
+
+    & span {
+        font-size: 0.7em;
+    }
+}
+
+nav {
+    text-align: center;
+}
+
+.forecast {
+    margin-inline: auto;
+    text-align: center;
+}
+
+.button {
+    size: 15px;
+}
