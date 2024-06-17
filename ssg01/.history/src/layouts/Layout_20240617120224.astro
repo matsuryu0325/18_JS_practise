@@ -20,9 +20,8 @@ import { ViewTransitions } from "astro:transitions";
     <meta property="og:url" content={pagepath} />
     <meta property="og:image" content={ogppath} />
     <meta property="og:type" content="website" />
-    <ViewTransitions />
   </head>
-  <body transition:animate="slide">
+  <body>
     <header>
       <h2>{title}</h2>
       <nav>
@@ -35,20 +34,20 @@ import { ViewTransitions } from "astro:transitions";
     <footer>
       <p>&copy; 2024 Trident School of Infrmation Technology</p>
     </footer>
-    <script
-      is:inline
-      src="https://code.jquery.com/jquery-3.7.1.min.js"
-      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-      crossorigin="anonymous"></script>
-    <script is:inline>
-      $("footer p").on("click", () => {
-        alert($("footer p").text());
-      });
-    </script>
-    <style>
-      h2 {
-        color: red;
-      }
-    </style>
   </body>
 </html>
+<script
+  is:inline
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"></script>
+<script is:inline>
+  $("footer p").on("click", () => {
+    alert($("footer p").text());
+  });
+</script>
+<style>
+  h2 {
+    color: red;
+  }
+</style>
